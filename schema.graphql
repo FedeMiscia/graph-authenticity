@@ -1,0 +1,46 @@
+# La tabella ActiveItem è stata creata ad hoc manualmente
+type ActiveItem @entity {
+  id: ID!
+  buyer: Bytes # Il buyer sarà nullo fin quando il prodotto è sul mercato e non viene acquistato
+  seller: Bytes!
+  nftAddress: Bytes!
+  tokenId: BigInt!
+}
+
+type ItemBought @entity(immutable: false) {
+  id: ID!
+  buyer: Bytes! # address
+  nftAddress: Bytes! # address
+  tokenId: BigInt! # uint256
+  inStaking: Boolean
+  timestamp: BigInt!
+}
+
+type ItemCancelled @entity(immutable: true) {
+  id: ID!
+  seller: Bytes! # address
+  nftAddress: Bytes! # address
+  tokenId: BigInt! # uint256
+}
+
+type ItemListed @entity(immutable: false) {
+  id: ID!
+  seller: Bytes! # address
+  nftAddress: Bytes! # address
+  tokenId: BigInt! # uint256
+}
+
+type TokenGetBack @entity(immutable: true) {
+  id: ID!
+  nftAddress: Bytes! # address
+  tokenId: BigInt! # uint256
+  owner: Bytes! # address
+}
+
+type Token_Transfered @entity(immutable: false) {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  nftAddress: Bytes! # address
+  tokenId: BigInt! # uint256
+}
